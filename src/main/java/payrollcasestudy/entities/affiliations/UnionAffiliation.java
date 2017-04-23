@@ -9,12 +9,16 @@ import payrollcasestudy.entities.ServiceCharge;
 public class UnionAffiliation {
 	public static final Matcher NO_AFFILIATION = null;
 	private int memberId;
-	private double pay;
-	public UnionAffiliation(int memberId, double pay){
+	private double dues;
+	public UnionAffiliation(int memberId, double dues){
 		this.memberId = memberId;
-		this.pay = pay;
+		this.dues = dues;
 	}
 	public ServiceCharge getServiceCharge(Calendar date) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public Double getDues() {
 		// TODO Auto-generated method stub
 		return null;
 	}
