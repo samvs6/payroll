@@ -15,8 +15,8 @@ public class UnionAffiliation {
 		this.dues = dues;
 	}
 	public ServiceCharge getServiceCharge(Calendar date) {
-		// TODO Auto-generated method stub
-		return null;
+		ServiceCharge charge = new ServiceCharge(date , dues);
+		return charge;
 	}
 	public Double getDues() {
 		// TODO Auto-generated method stub
