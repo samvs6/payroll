@@ -1,5 +1,6 @@
 package payrollcasestudy.entities;
 
+import payrollcasestudy.entities.affiliations.UnionAffiliation;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 import payrollcasestudy.entities.paymentmethods.PaymentMethod;
 import payrollcasestudy.entities.paymentschedule.PaymentSchedule;
@@ -75,5 +76,9 @@ public class Employee {
         payCheck.setNetPay(netPay);
         paymentMethod.pay(payCheck);
     }
+
+	public void setUnionAffiliation(UnionAffiliation unionAffiliation) {
+		unionAffiliation = new UnionAffiliation(this.employeeId,2);
+	}
 
 }
