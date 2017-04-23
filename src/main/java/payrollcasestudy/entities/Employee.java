@@ -81,4 +81,8 @@ public class Employee {
 		unionAffiliation = new UnionAffiliation(this.employeeId,2);
 	}
 
+	public UnionAffiliation getUnionAffiliation() {
+		return null;
+	}
+
 }
