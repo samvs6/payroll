@@ -14,7 +14,7 @@ public class Employee {
     private int employeeId;
     private String name;
     private String address;
-    private UnionAffiliation union = UnionAffiliation.NO_AFFILIATION;
+    private UnionAffiliation unionAffiliation = UnionAffiliation.NO_AFFILIATION;
 
     public Employee(int employeeId, String name, String address) {
         this.employeeId = employeeId;
@@ -79,11 +79,11 @@ public class Employee {
     }
 
 	public void setUnionAffiliation(UnionAffiliation unionAffiliation) {
-		unionAffiliation = new UnionAffiliation(this.employeeId,2);
+		this.unionAffiliation = unionAffiliation;
 	}
 
 	public UnionAffiliation getUnionAffiliation() {
-		return union;
+		return unionAffiliation;
 	}
 
 }
