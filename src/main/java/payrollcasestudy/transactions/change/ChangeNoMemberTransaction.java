@@ -1,9 +1,10 @@
 package payrollcasestudy.transactions.change;
 
+import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.transactions.Transaction;
 
 public class ChangeNoMemberTransaction implements Transaction {
-	
+	PayrollDatabase database = PayrollDatabase.globalPayrollDatabase;
 	private int employeeId;
 
 	public ChangeNoMemberTransaction(int employee) {

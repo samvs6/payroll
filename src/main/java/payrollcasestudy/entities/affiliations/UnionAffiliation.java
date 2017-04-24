@@ -19,7 +19,7 @@ public class UnionAffiliation {
 		return charge;
 	}
 	public Double getDues() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return dues;
 	}
 }
