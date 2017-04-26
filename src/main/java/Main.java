@@ -6,7 +6,7 @@ public class Main {
 	public static void main(String[] args) {
 		get("/", (request, response) -> hola());
 		post("/hola", (request, response) -> responder_saludo(request.queryParams("nombre_saludo")));
-		get("/Arquitectura", (request, response) -> "Hola PAYRTOLL");
+		get("/Arquitectura", (request, response) -> "Hola arquitectura");
 	}
 
 	private static String responder_saludo(String nombre) {
