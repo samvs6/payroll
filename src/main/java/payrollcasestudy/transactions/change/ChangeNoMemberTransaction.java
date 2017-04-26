@@ -5,21 +5,19 @@ import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.affiliations.UnionAffiliation;
 import payrollcasestudy.transactions.Transaction;
 
-public class ChangeNoMemberTransaction implements Transaction {
+public class ChangeNoMemberTransaction extends ChangeEmployeeTransaction {
 	PayrollDatabase database = PayrollDatabase.globalPayrollDatabase;
 	private int employeeId;
 	private Employee employee;
 
 	public ChangeNoMemberTransaction(int employee) {
-		this.employeeId = employee;
+		super(employee);
 	}
 
-	public void execute() {
-		Employee employee = database.getEmployee(employeeId);
+	@Override
+	public void changeEmployee(Employee employee) {
 		int memberId = employee.getUnionAffiliation().getMemberId();
-        database.deleteUnionMember(memberId);
-        employee.setUnionAffiliation(null);
-
+		employee.setUnionAffiliation(UnionAffiliation.NO_AFFILIATION);
+		database.deleteUnionMember(memberId);
 	}
-
 }
