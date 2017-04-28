@@ -6,7 +6,10 @@ import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 import payrollcasestudy.entities.paymentmethods.PaymentMethod;
 import payrollcasestudy.entities.paymentschedule.PaymentSchedule;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Set;
 
 public class Employee {
     private PaymentClassification paymentClassification;
@@ -103,5 +106,16 @@ public class Employee {
 		return PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
 	}
 	
+	public static List<Employee> getAllEmployees(){
+		List<Employee> allEmployees = new ArrayList<>();
+		Employee employee;
+		Set<Integer> employeeIds=PayrollDatabase.globalPayrollDatabase.getAllEmployeeIds();
+		List<Integer> employeeIdsList = new ArrayList<>(employeeIds);
+		for(int i = 0; i < employeeIdsList.size();i++ ){
+			employee = PayrollDatabase.globalPayrollDatabase.getEmployee(employeeIdsList.get(i));
+			allEmployees.add(employee);
+		}
+		return allEmployees;
+	}
 	
 }
