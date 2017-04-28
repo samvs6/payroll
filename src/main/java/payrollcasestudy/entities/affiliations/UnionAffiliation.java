@@ -37,6 +37,32 @@ public class UnionAffiliation {
 		this.serviceCharges.put(date, new ServiceCharge(date, amount));
 
 	}
-	
+	public double calculateDeduction(PayCheck payCheck) {
+		// TODO Auto-generated method stub
+		return calculateUnionAmount(payCheck) + calculateServiceCharges(payCheck);
+	}
+	private double calculateUnionAmount(PayCheck payCheck) {
+		int fridays = numberOfFridays(payCheck.getPayPeriodStart(), payCheck.getPayPeriodEnd());
+		return dues * fridays;
+	}
+
+	private double calculateServiceCharges(PayCheck payCheck) {
+		double totalServiceCharge = 0;
+		for(ServiceCharge serviceCharge : serviceCharges.values()){
+			if(isInPayPeriod(serviceCharge.getDate(), payCheck))
+				totalServiceCharge += serviceCharge.getAmount();
+		}
+		return totalServiceCharge;
+	}
+
+	private int numberOfFridays(Calendar payPeriodStart, Calendar payPeriodEnd) {
+		int fridays = 0;
+		while(!payPeriodStart.after(payPeriodEnd)){
+			if (payPeriodStart.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY)
+                fridays++;
+            payPeriodStart.add(Calendar.DAY_OF_MONTH, 1);
+		}
+		return fridays;
+	}
 	
 }
