@@ -6,8 +6,8 @@ import payrollcasestudy.entities.views.EmployeeView;
 public class Main {
 
 	public static void main(String[] args) {
-		get("/", (request, response) -> EmployeeView.hola());
-		post("/hola", (request, response) -> EmployeeView.responder_saludo(request.queryParams("nombre_saludo")));
-		get("/Arquitectura", (request, response) -> "Hola arquitectura");
+		get("/", (request, response) -> EmployeeView.registrationForm());
+		post("/newEmployee", (request, response) -> EmployeeView.createNewEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address")));
+		get("/showEmployee", (request, response) -> EmployeeView.showEmployee());
 	}
 }

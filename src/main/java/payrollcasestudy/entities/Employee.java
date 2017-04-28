@@ -1,5 +1,6 @@
 package payrollcasestudy.entities;
 
+import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.affiliations.UnionAffiliation;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
 import payrollcasestudy.entities.paymentmethods.PaymentMethod;
@@ -16,13 +17,18 @@ public class Employee {
     private String address;
     private UnionAffiliation unionAffiliation;
 
+    public Employee (){
+    	
+    }
     public Employee(int employeeId, String name, String address) {
         this.employeeId = employeeId;
         this.name = name;
         this.address = address;
         unionAffiliation = UnionAffiliation.NO_AFFILIATION;
     }
-
+    public int getEmployeeId(){
+    	return employeeId;
+    }
     public PaymentClassification getPaymentClassification() {
         return paymentClassification;
     }
@@ -89,4 +95,7 @@ public class Employee {
 		return unionAffiliation;
 	}
 
+	public void safeEmployeeInDB(int id, Employee employee){
+		PayrollDatabase.globalPayrollDatabase.addEmployee(id, employee);
+	}
 }
