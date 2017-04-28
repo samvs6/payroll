@@ -1,5 +1,10 @@
 package payrollcasestudy.entities.views;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+
 import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.Employee;
 
@@ -35,11 +40,27 @@ public class EmployeeView {
 		employee.safeEmployeeInDB(employeeIdInt, employee);
 		return "Registrando a "+name+" Direccion: "+address+" ID: "+employeeId;
 	}
-
+	
 	public static Object showEmployee() {
 		int employeeId=1;
-		Employee employee;
-		employee = PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
+		Employee employee = Employee.getEmployeeFromDB(employeeId);
         return employee.getName().toString()+ " - " + employee.getAddress();
+	}
+	
+	public static Object showAllEmployees(){
+		String employeesInformation = getAllEmployees();
+		return employeesInformation;
+	}
+	private static String getAllEmployees() {
+		Employee employee;
+		Set<Integer> employeeIds=PayrollDatabase.globalPayrollDatabase.getAllEmployeeIds();
+		List<Integer> employeeIdsList = new ArrayList<>(employeeIds);
+		String employeesInformation="";
+		for(int i = 0; i < employeeIdsList.size();i++ ){
+			employee = PayrollDatabase.globalPayrollDatabase.getEmployee(employeeIdsList.get(i));
+			employeesInformation += employee.getEmployeeId()+"-"+employee.getName()+"-"+employee.getAddress()+"<br>";
+		}
+		String listString = employeeIdsList.toString();
+		return employeesInformation;
 	}
 }

@@ -98,4 +98,10 @@ public class Employee {
 	public void safeEmployeeInDB(int id, Employee employee){
 		PayrollDatabase.globalPayrollDatabase.addEmployee(id, employee);
 	}
+	
+	public static Employee getEmployeeFromDB(int employeeId){
+		return PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
+	}
+	
+	
 }

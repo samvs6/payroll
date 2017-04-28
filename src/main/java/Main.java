@@ -9,5 +9,6 @@ public class Main {
 		get("/", (request, response) -> EmployeeView.registrationForm());
 		post("/newEmployee", (request, response) -> EmployeeView.createNewEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address")));
 		get("/showEmployee", (request, response) -> EmployeeView.showEmployee());
+		get("/showAllEmployees", (request, response) -> EmployeeView.showAllEmployees());
 	}
 }
