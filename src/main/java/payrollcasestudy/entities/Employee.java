@@ -106,8 +106,8 @@ public class Employee {
 		return PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
 	}
 	
-	public static List<Employee> getAllEmployees(){
-		List<Employee> allEmployees = new ArrayList<>();
+	public static ArrayList<Employee> getAllEmployees(){
+		ArrayList<Employee> allEmployees = new ArrayList<>();
 		Employee employee;
 		Set<Integer> employeeIds=PayrollDatabase.globalPayrollDatabase.getAllEmployeeIds();
 		List<Integer> employeeIdsList = new ArrayList<>(employeeIds);

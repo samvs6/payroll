@@ -66,7 +66,7 @@ public class EmployeeView {
 	
 	private static String getAllEmployees() {
 		Employee employee;
-		List<Employee> employeesList =  Employee.getAllEmployees();
+		ArrayList<Employee> employeesList =  Employee.getAllEmployees();
 		String employeesInformation="";
 		for(int i = 0; i < employeesList.size();i++ ){
 			employee = employeesList.get(i);
