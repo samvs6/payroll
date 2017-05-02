@@ -17,7 +17,7 @@ public class Main {
 		      return new ModelAndView(new HashMap(), "templates/hello.vtl");
 		    }, new VelocityTemplateEngine());
 		get("/createNewEmployee", (request, response) -> {
-		      return new ModelAndView(new HashMap(), "templates/createEmployeeForm.vtl");
+		      return new ModelAndView(new HashMap(), "templates/Employee/newEmployee.vtl");
 		    }, new VelocityTemplateEngine());
 		
 	
