@@ -19,7 +19,18 @@ public class Main {
 		get("/createNewEmployee", (request, response) -> {
 		      return new ModelAndView(new HashMap(), "templates/createEmployeeForm.vtl");
 		    }, new VelocityTemplateEngine());
-		
+		get("/hello", (request, response) -> {
+		        Map<String, Object> model = new HashMap<>();
+		        Map<String, String> data = new HashMap<>();
+
+		        data.put("message", "Hello Velocity World");
+		        data.put("att2", "Another attribute just to make sure it really works");
+
+		        model.put("data", data);
+		        model.put("title", "Example 07");
+
+		        return new ModelAndView(model, "hello.vm");
+		    }, new VelocityTemplateEngine());
 	
 		post("/newEmployee", (request, response) -> EmployeeView.createNewEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address")));
 		get("/showEmployee", (request, response) -> EmployeeView.showEmployee());
