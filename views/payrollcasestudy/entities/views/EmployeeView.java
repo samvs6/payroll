@@ -9,24 +9,7 @@ import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.Employee;
 
 public class EmployeeView {
-	public static String registrationForm() {
-		Header header = new Header();
-		return 	header.header()
-					+"<body>"
-					+"<div class='container'>"
-						+"<form method='post' action='/newEmployee'>" 
-						+ "<label>CI:</label>"
-						+ "<input type='text' name='id'><br>"
-						+ "<label>Nombre:</label>"
-						+ "<input type='text' name='name'><br>"
-						+ "<label>Direccion:</label>"
-						+ "<input type='text' name='address'><br>"
-						+ "<a href='/' type='button' class='btn btn-primary'>Atras</a>"
-						+ "<input type='submit' class='btn btn-success' value='Registrar'"
-					+"</div>"
-					+ "</body>"
-				+ "</html>";
-	}
+
 	public static String getData() {
 		Header header = new Header();
 		return 	header.header()
