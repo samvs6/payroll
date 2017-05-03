@@ -10,8 +10,44 @@ import payrollcasestudy.entities.Employee;
 
 public class EmployeeView {
 
+	public static String getData() {
+		
+		return  "<body>"
+					+"<div class='container'>"
+						+"<form method='post' action='/showEmployee'>" 
+						+ "<input type='submit' class='btn btn-success' value='Presioname'"
+					+"</div>"
+					+ "</body>"
+				+ "</html>";
+	}
 
-
+	public static Object createNewEmployee(String employeeId, String name, String address) {
+		
+		int employeeIdInt = Integer.parseInt(employeeId);
+		Employee employee = new Employee(employeeIdInt,name,address);
+		employee.safeEmployeeInDB(employeeIdInt, employee);
+		return  "<div class='container'>"
+				+ "Registrando a "+name+" Direccion: "+address+" ID: "+employeeId
+				+"<br><br>"
+				+"<a href='/' type='button' class='btn btn-primary'>Inicio</a>"
+				+"</div>"
+				+ "</body>"
+				+ "</html>";
+	}
+	
+	public static Object showEmployee() {
+		int employeeId=1;
+		Employee employee = Employee.getEmployeeFromDB(employeeId);
+        return  "<div class='container'>"
+        		+employee.getName().toString()+ " - " + employee.getAddress()
+		        +"<br><br>"
+				+"<a href='/' type='button' class='btn btn-primary'>Inicio</a>"
+				+"</div>"
+				+ "</body>"
+				+ "</html>";
+	}
+	
+	
 	
 
 	public static ArrayList<Employee> getAllEmployees(){

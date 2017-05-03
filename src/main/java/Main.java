@@ -7,7 +7,6 @@ import java.util.Map;
 
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.views.EmployeeView;
-import payrollcasestudy.entities.views.Index;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
