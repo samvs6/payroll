@@ -24,6 +24,10 @@ public class Main {
 		get("/createNewHourlyEmployee", (request, response) -> {
 		      return new ModelAndView(view, "templates/Employee/newHourlyEmployee.vtl");
 		    }, new VelocityTemplateEngine());
+
+		get("/createNewSalariedEmployee", (request, response) -> {
+		      return new ModelAndView(view, "templates/Employee/newSalariedEmployee.vtl");
+		    }, new VelocityTemplateEngine());
 		
 		get("/showAllEmployees", (request, response) -> {
 			ArrayList<Employee> employees=new ArrayList<>();
@@ -39,9 +43,14 @@ public class Main {
 			return new ModelAndView(view, "templates/Employee/showEmployee.vtl");
 		    }, new VelocityTemplateEngine());
 		
+		
+		post("/newSalariedEmployee", (request, response) -> 
+		EmployeeView.createNewSalariedEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"),request.queryParams("salary")));
+
 		post("/newHourlyEmployee", (request, response) -> 
 		EmployeeView.createNewHourlyEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"),request.queryParams("hourlyRate")));
 
+		
 		post("/newEmployee", (request, response) -> EmployeeView.createNewEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address")));
 		get("/showEmployee", (request, response) -> EmployeeView.showEmployee());
 		//get("/showAllEmployees", (request, response) -> EmployeeView.showAllEmployees());
