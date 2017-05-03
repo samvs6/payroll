@@ -25,7 +25,7 @@ public class EmployeeView {
 		
 		int employeeIdInt = Integer.parseInt(employeeId);
 		Employee employee = new Employee(employeeIdInt,name,address);
-		employee.safeEmployeeInDB(employeeIdInt, employee);
+		safeEmployeeInDB(employeeIdInt, employee);
 		return  "<div class='container'>"
 				+ "Registrando a "+name+" Direccion: "+address+" ID: "+employeeId
 				+"<br><br>"
@@ -37,7 +37,7 @@ public class EmployeeView {
 	
 	public static Object showEmployee() {
 		int employeeId=1;
-		Employee employee = Employee.getEmployeeFromDB(employeeId);
+		Employee employee = getEmployeeFromDB(employeeId);
         return  "<div class='container'>"
         		+employee.getName().toString()+ " - " + employee.getAddress()
 		        +"<br><br>"
@@ -48,7 +48,9 @@ public class EmployeeView {
 	}
 	
 	
-	
+	public static void safeEmployeeInDB(int id, Employee employee){
+		PayrollDatabase.globalPayrollDatabase.addEmployee(id, employee);
+	}
 
 	public static ArrayList<Employee> getAllEmployees(){
 		ArrayList<Employee> allEmployees = new ArrayList<>();

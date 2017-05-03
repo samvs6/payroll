@@ -98,24 +98,8 @@ public class Employee {
 		return unionAffiliation;
 	}
 
-	public void safeEmployeeInDB(int id, Employee employee){
-		PayrollDatabase.globalPayrollDatabase.addEmployee(id, employee);
-	}
 	
-	public static Employee getEmployeeFromDB(int employeeId){
-		return PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
-	}
 	
-	public static ArrayList<Employee> getAllEmployees(){
-		ArrayList<Employee> allEmployees = new ArrayList<>();
-		Employee employee;
-		Set<Integer> employeeIds=PayrollDatabase.globalPayrollDatabase.getAllEmployeeIds();
-		List<Integer> employeeIdsList = new ArrayList<>(employeeIds);
-		for(int i = 0; i < employeeIdsList.size();i++ ){
-			employee = PayrollDatabase.globalPayrollDatabase.getEmployee(employeeIdsList.get(i));
-			allEmployees.add(employee);
-		}
-		return allEmployees;
-	}
+	
 	
 }
