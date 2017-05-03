@@ -24,7 +24,7 @@ public class Main {
 		
 		get("/showAllEmployees", (request, response) -> {
 			ArrayList<Employee> employees=new ArrayList<>();
-			employees =Employee.getAllEmployees();
+			employees =EmployeeView.getAllEmployees();
 			view.put("employees", employees);
 		      return new ModelAndView(view, "templates/Employee/listingEmployee.vtl");
 		    }, new VelocityTemplateEngine());
