@@ -18,18 +18,14 @@ public class EmployeePresenter {
 		double hourlyRate_doule= Double.parseDouble(hourlyRate);
 		 Transaction addEmployeeTransaction = new AddHourlyEmployeeTransaction(employeeId_int, name, address,hourlyRate_doule);
 	        addEmployeeTransaction.execute();
-	        return "Empleado por hora creado"
-	        		+"<br><br>"
-	        		+ "<a href='/' type='button' class='btn btn-primary'>Inicio</a>";
+	        return "Empleado por hora creado";
 	}
 	public static String createNewSalariedEmployee(String employeeId, String name, String address, String salary){
 		int employeeId_int = Integer.parseInt(employeeId);
 		double salary_doule = Double.parseDouble(salary);
 		 Transaction addEmployeeTransaction = new AddSalariedEmployeeTransaction(employeeId_int, name, address,salary_doule);
 	        addEmployeeTransaction.execute();
-	        return "Empleado por asalariado creado"
-	        		+"<br>"
-	        		+"<a href='/' type='button' class='btn btn-primary'>Inicio</a>";
+	        return "Empleado por asalariado creado";
 	}
 
 	public static ArrayList<Employee> getAllEmployees(){
