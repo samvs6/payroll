@@ -61,4 +61,8 @@ public class EmployeeView {
 		}
 		return allEmployees;
 	}
+
+	public static Employee getEmployeeFromDB(int employeeId){
+		return PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
+	}
 }

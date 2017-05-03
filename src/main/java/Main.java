@@ -28,6 +28,13 @@ public class Main {
 		      return new ModelAndView(view, "templates/Employee/listingEmployee.vtl");
 		    }, new VelocityTemplateEngine());
 		
+		get("/employees/:id", (request, response) -> {			
+			int employeeId =  Integer.parseInt( request.params(":id"));
+			Employee employee = EmployeeView.getEmployeeFromDB(employeeId);
+			view.put("employees", employee);
+			return new ModelAndView(view, "templates/Employee/showEmployee.vtl");
+		    }, new VelocityTemplateEngine());
+		
 		post("/newEmployee", (request, response) -> EmployeeView.createNewEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address")));
 		get("/showEmployee", (request, response) -> EmployeeView.showEmployee());
 		//get("/showAllEmployees", (request, response) -> EmployeeView.showAllEmployees());

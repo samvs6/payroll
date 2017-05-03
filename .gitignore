@@ -1,5 +1,5 @@
 target/
 .idea/
 payroll-casestudy.iml
-
+*.log
 target
