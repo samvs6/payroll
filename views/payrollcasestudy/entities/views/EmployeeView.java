@@ -7,6 +7,8 @@ import java.util.Set;
 
 import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.Employee;
+import payrollcasestudy.transactions.Transaction;
+import payrollcasestudy.transactions.add.AddSalariedEmployeeTransaction;
 
 public class EmployeeView {
 
@@ -47,6 +49,13 @@ public class EmployeeView {
 				+ "</html>";
 	}
 	
+	public static String createNewHourlyEmployee(String employeeId, String name, String address, String hourlyRate){
+		int employeeId_int = Integer.parseInt(employeeId);
+		double hourlyRate_doule= Double.parseDouble(hourlyRate);
+		 Transaction addEmployeeTransaction = new AddSalariedEmployeeTransaction(employeeId_int, name, address,hourlyRate_doule);
+	        addEmployeeTransaction.execute();
+	        return "Empleado por hora creado";
+	}
 	
 	public static void safeEmployeeInDB(int id, Employee employee){
 		PayrollDatabase.globalPayrollDatabase.addEmployee(id, employee);
