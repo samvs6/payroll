@@ -28,19 +28,4 @@ public class EmployeePresenter {
 	        return "Empleado por asalariado creado";
 	}
 
-	public static ArrayList<Employee> getAllEmployees(){
-		ArrayList<Employee> allEmployees = new ArrayList<>();
-		Employee employee;
-		Set<Integer> employeeIds=PayrollDatabase.globalPayrollDatabase.getAllEmployeeIds();
-		List<Integer> employeeIdsList = new ArrayList<>(employeeIds);
-		for(int i = 0; i < employeeIdsList.size();i++ ){
-			employee = PayrollDatabase.globalPayrollDatabase.getEmployee(employeeIdsList.get(i));
-			allEmployees.add(employee);
-		}
-		return allEmployees;
-	}
-
-	public static Employee getEmployeeFromDB(int employeeId){
-		return PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
-	}
 }

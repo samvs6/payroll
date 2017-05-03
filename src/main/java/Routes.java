@@ -4,6 +4,7 @@ import static spark.Spark.post;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.views.EmployeePresenter;
 import spark.ModelAndView;
@@ -30,15 +31,15 @@ public class Routes {
 		
 		get("/showAllEmployees", (request, response) -> {
 			ArrayList<Employee> employees=new ArrayList<>();
-			employees =EmployeePresenter.getAllEmployees();
+			employees =PayrollDatabase.globalPayrollDatabase.getAllEmployees();
 			view.put("employees", employees);
 		      return new ModelAndView(view, "templates/Employee/listingEmployee.vtl");
 		    }, new VelocityTemplateEngine());
 		
 		get("/employees/:id", (request, response) -> {			
 			int employeeId =  Integer.parseInt( request.params(":id"));
-			Employee employee = EmployeePresenter.getEmployeeFromDB(employeeId);
-			view.put("employees", employee);
+			Employee employee = PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
+			view.put("employee", employee);
 			return new ModelAndView(view, "templates/Employee/showEmployee.vtl");
 		    }, new VelocityTemplateEngine());
 		
