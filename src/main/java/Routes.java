@@ -45,7 +45,7 @@ public class Routes {
 		
 		
 		post("/createNewSalariedEmployee", (request, response) -> 
-		EmployeePresenter.createNewSalariedEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"),request.queryParams("salary")));
+		EmployeePresenter.createNewSalariedEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"), request.queryParams("employeeType"),request.queryParams("salary"),request.queryParams("comision")));
 
 		post("/createNewHourlyEmployee", (request, response) -> 
 		EmployeePresenter.createNewHourlyEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"),request.queryParams("hourlyRate")));

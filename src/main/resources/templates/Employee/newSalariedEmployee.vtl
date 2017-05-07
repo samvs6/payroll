@@ -6,6 +6,21 @@
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
   </head>
   <body>
+
+  	<script type="text/javascript">
+
+	function yesnoCheck() {
+	    if (document.getElementById('comision').checked) {
+	       document.getElementById('inputComision').style.display = 'block';
+	        document.getElementById('textComision').value = "";
+	    }
+	    else document.getElementById('inputComision').style.display = 'none';
+	    document.getElementById('textComision').value = "0";
+
+	}
+
+</script>
+
     <div class='container'>
     	<h1>Nuevo empleado asalariado</h1>
         <hr class="intro-divider">
@@ -37,6 +52,20 @@
 					      <label class="control-label col-sm-2">Salario:</label>
 					      <div class="col-sm-15">
 					        <input  maxlength="6"  type="text" class="form-control" name="salary" required>
+					      </div>
+					    </div>
+					    <div class="form-group">
+					      <label>Tipo de empleado:</label>
+					      <div class="col-sm-15">					 
+						    <input type="radio" onclick="javascript:yesnoCheck();" name="employeeType" id="salario" value=1 checked> Salariado<br>
+	  						<input type="radio" onclick="javascript:yesnoCheck();" name="employeeType" id="hora" value=2> Por hora<br>
+	  						<input type="radio" onclick="javascript:yesnoCheck();" name="employeeType" id="comision" value=3> Con Comision<br> 
+						   </div>
+					    </div>
+					    <div class="form-group" id ="inputComision" style="display:none">
+					      <label class="control-label col-sm-2">Comision:</label>
+					      <div class="col-sm-15">
+					        <input  maxlength="6"  type="text" class="form-control" id ="textComision" name="comision" value = "0">
 					      </div>
 					    </div>
 
