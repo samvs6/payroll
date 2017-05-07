@@ -44,10 +44,10 @@ public class Routes {
 		    }, new VelocityTemplateEngine());
 		
 		
-		post("/newSalariedEmployee", (request, response) -> 
+		post("/createNewSalariedEmployee", (request, response) -> 
 		EmployeePresenter.createNewSalariedEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"),request.queryParams("salary")));
 
-		post("/newHourlyEmployee", (request, response) -> 
+		post("/createNewHourlyEmployee", (request, response) -> 
 		EmployeePresenter.createNewHourlyEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"),request.queryParams("hourlyRate")));
 
 	}
