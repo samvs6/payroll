@@ -2,9 +2,13 @@ package payrollcasestudy.entities;
 
 import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.entities.affiliations.UnionAffiliation;
+import payrollcasestudy.entities.paymentclassifications.CommissionedPaymentClassification;
+import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
+import payrollcasestudy.entities.paymentclassifications.SalariedClassification;
 import payrollcasestudy.entities.paymentmethods.PaymentMethod;
 import payrollcasestudy.entities.paymentschedule.PaymentSchedule;
+
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -97,6 +101,20 @@ public class Employee {
 	public UnionAffiliation getUnionAffiliation() {
 		return unionAffiliation;
 	}
+
+    public String getTypeEmployee(){
+        String result = "Nada";
+        if( paymentClassification instanceof SalariedClassification){
+            return "Salariado";
+        }
+        if( paymentClassification instanceof HourlyPaymentClassification){
+            return "Por hora";
+        }
+        if( paymentClassification instanceof CommissionedPaymentClassification){
+            return "Con comision";
+        }
+        return result;
+    }
 
 	
 
