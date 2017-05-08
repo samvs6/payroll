@@ -103,7 +103,6 @@ public class Employee {
 	}
 
     public String getTypeEmployee(){
-        String result = "Nada";
         if( paymentClassification instanceof SalariedClassification){
             return "Salariado";
         }
@@ -113,7 +112,7 @@ public class Employee {
         if( paymentClassification instanceof CommissionedPaymentClassification){
             return "Con comision";
         }
-        return result;
+        return "Ninguno";
     }
 
 	

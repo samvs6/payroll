@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Create Employee</title>
+    <title>Crear empleado</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
     <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js'></script>
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
@@ -22,9 +22,9 @@
 </script>
 
     <div class='container'>
-    	<h1>Nuevo empleado asalariado</h1>
+    	<h1>Nuevo empleado</h1>
         <hr class="intro-divider">
-         <form  class="col-md-4 col-md-offset-4" method="post" action="/createNewEmployee"> 									
+         <form  class="col-md-4 col-md-offset-4" method="post" action="/showAllEmployees"> 									
 						<div class="form-group">
 					      <label class="control-label col-sm-2">CI:</label>
 					      <div class="col-sm-15">
@@ -69,7 +69,7 @@
 					      </div>
 					    </div>
 
-						<a href="/" type="button" class="btn btn-danger col-sm-6">Cancelar</a>
+						<a href="/showAllEmployees" type="button" class="btn btn-danger col-sm-6">Cancelar</a>
 						<input type="submit" class="btn btn-success col-sm-6" value="Registrar">
 			</form>
      </div>

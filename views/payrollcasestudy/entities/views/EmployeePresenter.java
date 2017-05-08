@@ -17,6 +17,11 @@ public class EmployeePresenter {
 		int employeeId_int = Integer.parseInt(employeeId);
 		int employeeType_int = Integer.parseInt(employeeType);
 		double salary_doule = Double.parseDouble(salary);
+		int comision_int = Integer.parseInt(comision);
+		if(salary_doule<=0){
+			return "Error al agregar empleado";
+		}
+		
 		if(employeeType_int==1){
 			Transaction addEmployeeTransaction = new AddSalariedEmployeeTransaction(employeeId_int, name, address,salary_doule);
 	        addEmployeeTransaction.execute();
@@ -27,8 +32,8 @@ public class EmployeePresenter {
 	        addEmployeeTransaction.execute();
 	        return "Empleado por hora creado";		
 		}
-		if(employeeType_int==3){
-			int comision_int = Integer.parseInt(comision);
+		if(employeeType_int==3 && comision_int > 0){
+			
 			Transaction addEmployeeTransaction = new AddCommissionedEmployeeTransaction(employeeId_int, name, address,salary_doule,comision_int);
 	        addEmployeeTransaction.execute();
 	        return "Empleado con comision  creado";		

@@ -35,8 +35,13 @@ public class Routes {
 			return new ModelAndView(view, "templates/Employee/showEmployee.vtl");
 		    }, new VelocityTemplateEngine());
 		
-		
-		post("/createNewEmployee", (request, response) -> 
-		EmployeePresenter.createNewEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"), request.queryParams("employeeType"),request.queryParams("salary"),request.queryParams("comision")));
+		post("/showAllEmployees", (request, response) -> {
+			String respuesta = EmployeePresenter.createNewEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"), request.queryParams("employeeType"),request.queryParams("salary"),request.queryParams("comision"));
+			ArrayList<Employee> employees=new ArrayList<>();
+			employees =PayrollDatabase.globalPayrollDatabase.getAllEmployees();
+			view.put("employees", employees);
+			view.put("respuesta", respuesta);
+		      return new ModelAndView(view, "templates/Employee/listingEmployee.vtl");
+		    }, new VelocityTemplateEngine());
 	}
 }
