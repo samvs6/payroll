@@ -21,14 +21,6 @@ public class Routes {
 		      return new ModelAndView(view, "templates/Employee/newEmployee.vtl");
 		    }, new VelocityTemplateEngine());
 		
-		get("/createNewHourlyEmployee", (request, response) -> {
-		      return new ModelAndView(view, "templates/Employee/newHourlyEmployee.vtl");
-		    }, new VelocityTemplateEngine());
-
-		get("/createNewSalariedEmployee", (request, response) -> {
-		      return new ModelAndView(view, "templates/Employee/newSalariedEmployee.vtl");
-		    }, new VelocityTemplateEngine());
-		
 		get("/showAllEmployees", (request, response) -> {
 			ArrayList<Employee> employees=new ArrayList<>();
 			employees =PayrollDatabase.globalPayrollDatabase.getAllEmployees();
@@ -44,11 +36,7 @@ public class Routes {
 		    }, new VelocityTemplateEngine());
 		
 		
-		post("/createNewSalariedEmployee", (request, response) -> 
-		EmployeePresenter.createNewSalariedEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"), request.queryParams("employeeType"),request.queryParams("salary"),request.queryParams("comision")));
-
-		post("/createNewHourlyEmployee", (request, response) -> 
-		EmployeePresenter.createNewHourlyEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"),request.queryParams("hourlyRate")));
-
+		post("/createNewEmployee", (request, response) -> 
+		EmployeePresenter.createNewEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"), request.queryParams("employeeType"),request.queryParams("salary"),request.queryParams("comision")));
 	}
 }

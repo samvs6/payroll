@@ -13,15 +13,7 @@ import payrollcasestudy.transactions.add.AddSalariedEmployeeTransaction;
 
 public class EmployeePresenter {
 
-	
-	public static String createNewHourlyEmployee(String employeeId, String name, String address, String hourlyRate){
-		int employeeId_int = Integer.parseInt(employeeId);
-		double hourlyRate_doule= Double.parseDouble(hourlyRate);
-		 Transaction addEmployeeTransaction = new AddHourlyEmployeeTransaction(employeeId_int, name, address,hourlyRate_doule);
-	        addEmployeeTransaction.execute();
-	        return "Empleado por hora creado";
-	}
-	public static String createNewSalariedEmployee(String employeeId, String name, String address,String employeeType , String salary, String comision){
+	public static String createNewEmployee(String employeeId, String name, String address,String employeeType , String salary, String comision){
 		int employeeId_int = Integer.parseInt(employeeId);
 		int employeeType_int = Integer.parseInt(employeeType);
 		double salary_doule = Double.parseDouble(salary);
@@ -41,7 +33,7 @@ public class EmployeePresenter {
 	        addEmployeeTransaction.execute();
 	        return "Empleado con comision  creado";		
 		}
-		return "Error al agregar empleado. Respuesta de tipo empleado: " + employeeType;
+		return "Error al agregar empleado";
 		 
 	}
 
