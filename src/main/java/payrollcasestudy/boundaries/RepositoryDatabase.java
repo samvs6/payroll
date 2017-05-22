@@ -4,10 +4,6 @@ import payrollcasestudy.entities.Employee;
 
 import java.util.*;
 
-/**
- * Listing 19-3
- * Listing 19-4
- */
 public class RepositoryDatabase implements Repository{
     public static RepositoryDatabase globalRepositoryDatabase = new RepositoryDatabase();
 
