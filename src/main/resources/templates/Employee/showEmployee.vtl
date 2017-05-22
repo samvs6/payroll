@@ -6,11 +6,119 @@
     <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
   </head>
   <body>
-   <p>CI :$employee.getEmployeeId()</p>
-   <p>Nombre: $employee.getName()</p>
-   <p>Direccion: $employee.getAddress()</p>
-   <p>Tipo de empleado: $employee.getTypeEmployee()</p>
-   <br>
-   <a href="/showAllEmployees">Atras</a>
+  <div class='container'>
+
+    <h1>Detalles empleado</h1>
+    <hr class="intro-divider">
+     <p>CI :$employee.getEmployeeId()</p>
+     <p>Nombre: $employee.getName()</p>
+     <p>Direccion: $employee.getAddress()</p>
+     <p>Tipo de empleado: $employee.getTypeEmployee()</p>
+     <br>
+         #if (${employee.getTypeEmployee()}=="Por hora")
+          <div class="row">
+          <h3>Monto Hora: ${employee.getPaymentClassification().getHourlyRate()}</h3>
+          <form  class="col-md-4 col-md-offset-4" method='post' action='/payHourly'>
+          <div class="form-group">
+            <div class="form-group">
+              <label class="control-label col-sm-2">Dia:</label>
+              <input type="number" name="day" class="form-control" id="" placeholder="1-31">
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Mes:</label>
+              <select  class="form-control" name="month">
+                <option value="0">Enero</option>
+                <option value="1">Febrero</option>
+                <option value="2">Marzo</option>
+                <option value="3">Abril</option>
+                <option value="4">Mayo</option>
+                <option value="5">Junio</option>
+                <option value="6">Julio</option>
+                <option value="7">Agosto</option>
+                <option value="8">Septiembre</option>
+                <option value="9">Octubre</option>
+                <option value="10">Noviembre</option>
+                <option value="11">Diciembre</option>       
+             </select>
+            </div>
+            <div class="form-group">
+              <label for="">Año:</label>
+              <input type="number" name="year" class="form-control" id="" placeholder="Ej: 2016">
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Horas:</label>
+              <input type="number" name="hours" class="form-control" id="" placeholder="">
+            </div>
+            <div class="form-group">
+              <input type="hidden" value="${employee.getEmployeeId()}" name="employeeId">
+            </div>
+            
+        </div>
+        </br>
+        <input type="submit" class="btn btn-success col-sm-6" value="Registrar Horas">
+          </form>
+        <br>
+        </div>
+        #end
+        #if (${employee.getTypeEmployee()}=="Con comision")
+          <div class="form-group">
+          <h3>Monto Semanal: ${employee.getPaymentClassification().getMonthlySalary()}</h3>
+          <h3>Comisión: ${employee.getPaymentClassification().getCommissionRate()}</h3>
+          
+          <form  class="col-md-4 col-md-offset-4" method='post' action='/payCommissioned'>
+          <div class="form-group">
+            <div class="form-group">
+              <label class="control-label col-sm-2">Dia:</label>
+              <input type="number" name="day" class="form-control" id="" placeholder="1-31">
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2">Mes:</label>
+              <select  class="form-control" name="month">
+                <option value="0">Enero</option>
+            <option value="1">Febrero</option>
+            <option value="2">Marzo</option>
+            <option value="3">Abril</option>
+            <option value="4">Mayo</option>
+            <option value="5">Junio</option>
+            <option value="6">Julio</option>
+            <option value="7">Agosto</option>
+            <option value="8">Septiembre</option>
+            <option value="9">Octubre</option>
+            <option value="10">Noviembre</option>
+            <option value="11">Diciembre</option>       
+         </select>
+            </div>
+            <div class="form-group">
+              <label for="">Año:</label>
+              <input type="number" name="year" class="form-control" id="" placeholder="Ej: 2005">
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-4">Monto por ventas:</label>
+              <input type="number" step="0.01" name="sales" class="form-control" id="" placeholder="Monto por Ventas">
+            </div>
+            <div class="col-md-4">
+              <input type="hidden" value="${employee.getEmployeeId()}" name="employeeId">
+            </div>
+        </div>
+        </br>
+        <input type="submit" class="btn btn-success col-sm-6" value="Registrar Venta">
+          </form>
+        <br>
+        </div>
+        #end
+        #if (${employee.getTypeEmployee()}=="Salariado")
+        <div class="form-group">
+            <h3>Salario: ${employee.getPaymentClassification().getSalary()}</h3>
+          <br>
+        </div>
+        #end
+        <div class="form-group">
+          <ul class="list-inline intro-social-buttons">                    
+              <li>
+                <a href='/showAllEmployees' type='button' class="btn btn-default btn-lg">Atras</a>
+              </li>
+          </ul>
+      </div>
+   </div>
   </body>
 </html>

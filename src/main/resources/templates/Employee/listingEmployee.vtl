@@ -27,6 +27,7 @@
     	 <th>Direccion</th>
     	 <th>Tipo de empleado</th>
     	 <th>Detalle</th>
+    	 <th>Pagos</th>
     	</thead>
     	<tbody>
         	#foreach ($employee in $employees)
@@ -35,7 +36,8 @@
 			    <td>$employee.getName().toString()</td>
 			    <td>$employee.getAddress().toString()</td>
 			    <td>$employee.getTypeEmployee().toString()</td>
-			    <td><a href="employees/$employee.getEmployeeId()">Ver</a><td>			
+			    <td><a href="employees/$employee.getEmployeeId()">Ver</a><td>
+			    <td><a href="pay/show/$employee.getEmployeeId()">Ver papeleta de pago</a><td>			
 			</tr>    
 			#end
 		</tbody>
