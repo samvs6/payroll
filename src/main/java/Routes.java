@@ -19,12 +19,12 @@ import spark.template.velocity.VelocityTemplateEngine;
 public class Routes {
 
 	public static void main(String[] args) {
-		 Transaction addEmployeeSalaried = new AddSalariedEmployeeTransaction(1,"Bob", "Home", 1000.0);	
+		 /*Transaction addEmployeeSalaried = new AddSalariedEmployeeTransaction(1,"Bob", "Home", 1000.0);	
 		 Transaction addEmployeeHourly = new AddHourlyEmployeeTransaction(2, "Bill", "Home", 15.25);
 		 Transaction addEmployeeCommissioned = new AddCommissionedEmployeeTransaction(3, "Carol", "Granja", 700.0, 9.25);
 		 addEmployeeSalaried.execute();
 		 addEmployeeHourly.execute();
-		 addEmployeeCommissioned.execute();
+		 addEmployeeCommissioned.execute();*/
 		HashMap<String,Object> view = new HashMap<String, Object>();
 		get("/", (request, response) -> {
 		      return new ModelAndView(view, "templates/mainPage.vtl");

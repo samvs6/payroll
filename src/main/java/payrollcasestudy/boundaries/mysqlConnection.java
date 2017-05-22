@@ -17,7 +17,7 @@ public static mysqlConnection relationalDatabase = new mysqlConnection();
 	private Connection connection;
 	private String localhost = "jdbc:mysql://localhost:3306";
 	private String user = "root";
-	private String password = "root";
+	private String password = "";
 	
 	public String getStatusConnection() {
 		try{
@@ -43,7 +43,7 @@ public static mysqlConnection relationalDatabase = new mysqlConnection();
 		HourlyPaymentClassification hourlyClassification =  (HourlyPaymentClassification) employee.getPaymentClassification(); 
 		try{
 			connection = (Connection) DriverManager.getConnection(localhost, user, password);
-			String insertEmployee_query = "INSERT INTO payroll_db.employee (ci_employee, first_name, last_name, address, payment_type) "
+			String insertEmployee_query = "INSERT INTO payroll_db.employee (employee_id, first_name, last_name, address, payment_type) "
 					+ "VALUES ('"+employee.getEmployeeId()+"', '"+employee.getName()+"', 'Undefined', '"+employee.getAddress()+"', 'hourly')";
 			String insertClassification_query = "INSERT INTO payroll_db.hourly_paymentClassification (ci_employee, hourlyRate) "
 					+ "VALUES ('"+employee.getEmployeeId()+"', '"+hourlyClassification.getHourlyRate()+"')";
