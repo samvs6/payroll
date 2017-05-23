@@ -37,20 +37,13 @@ public static mysqlConnection relationalDatabase = new mysqlConnection();
 
 	@Override
 	public void addEmployee(int employeeId, Employee employee) {
-		// TODO Auto-generated method stub
 		int queryResult=0;
-		int queryResult2=0;
-		HourlyPaymentClassification hourlyClassification =  (HourlyPaymentClassification) employee.getPaymentClassification(); 
 		try{
 			connection = (Connection) DriverManager.getConnection(localhost, user, password);
 			String insertEmployee_query = "INSERT INTO payroll_db.employee (employee_id, first_name, last_name, address, payment_type) "
 					+ "VALUES ('"+employee.getEmployeeId()+"', '"+employee.getName()+"', 'Undefined', '"+employee.getAddress()+"', 'hourly')";
-			String insertClassification_query = "INSERT INTO payroll_db.hourly_paymentClassification (ci_employee, hourlyRate) "
-					+ "VALUES ('"+employee.getEmployeeId()+"', '"+hourlyClassification.getHourlyRate()+"')";
 			Statement statement = (Statement) connection.createStatement();
-			Statement statement2 = (Statement) connection.createStatement();
 			queryResult = ((java.sql.Statement) statement).executeUpdate(insertEmployee_query);
-			queryResult2 = ((java.sql.Statement) statement2).executeUpdate(insertClassification_query);
 			System.out.println("Empleado creado satisfactoriamente.");
 		}catch (Exception e){
 			System.err.println(e);
