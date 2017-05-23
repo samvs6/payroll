@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import payrollcasestudy.boundaries.PayrollDatabase;
+import payrollcasestudy.boundaries.Repository;
+import payrollcasestudy.boundaries.RepositoryDatabase;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.PayCheck;
 import payrollcasestudy.entities.views.EmployeePresenter;
@@ -25,6 +27,7 @@ public class Routes {
 		 addEmployeeSalaried.execute();
 		 addEmployeeHourly.execute();
 		 addEmployeeCommissioned.execute();*/
+		Repository repository = new RepositoryDatabase();
 		HashMap<String,Object> view = new HashMap<String, Object>();
 		get("/", (request, response) -> {
 		      return new ModelAndView(view, "templates/mainPage.vtl");
@@ -36,14 +39,14 @@ public class Routes {
 		get("/showAllEmployees", (request, response) -> {
 			view.put("respuesta", "");
 			ArrayList<Employee> employees=new ArrayList<>();
-			employees =PayrollDatabase.globalPayrollDatabase.getAllEmployees();
+			employees =repository.getAllEmployees();
 			view.put("employees", employees);
 		      return new ModelAndView(view, "templates/Employee/listingEmployee.vtl");
 		    }, new VelocityTemplateEngine());
 		
 		get("/employees/:id", (request, response) -> {			
 			int employeeId =  Integer.parseInt( request.params(":id"));
-			Employee employee = PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId);
+			Employee employee = repository.getEmployee(employeeId);
 			view.put("employee", employee);
 			return new ModelAndView(view, "templates/Employee/showEmployee.vtl");
 		    }, new VelocityTemplateEngine());
@@ -51,7 +54,7 @@ public class Routes {
 		post("/showAllEmployees", (request, response) -> {
 			String respuesta = EmployeePresenter.createNewEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"), request.queryParams("employeeType"),request.queryParams("salary"),request.queryParams("comision"));
 			ArrayList<Employee> employees=new ArrayList<>();
-			employees =PayrollDatabase.globalPayrollDatabase.getAllEmployees();
+			employees =repository.getAllEmployees();
 			view.put("employees", employees);
 			view.put("respuesta", respuesta);
 		      return new ModelAndView(view, "templates/Employee/listingEmployee.vtl");
@@ -80,7 +83,7 @@ public class Routes {
 		get("/pay/show/:id", (request, response) -> {	
 			String employeeId = request.params(":id");
 			int employeeId_int =  Integer.parseInt( employeeId);
-			Employee employee = PayrollDatabase.globalPayrollDatabase.getEmployee(employeeId_int);
+			Employee employee = repository.getEmployee(employeeId_int);
 			PayCheck payCheck;
 			payCheck = PayPresenter.getPayCheckFromPayDayTransaction(employeeId);
 			double total =0;
