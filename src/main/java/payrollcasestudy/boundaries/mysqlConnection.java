@@ -1,6 +1,7 @@
 package payrollcasestudy.boundaries;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -88,7 +89,29 @@ public static mysqlConnection relationalDatabase = new mysqlConnection();
 
 	@Override
 	public ArrayList<Employee> getAllEmployees() {
-		// TODO Auto-generated method stub
+		ArrayList<Employee> newListEmployee = new ArrayList<>();
+		Employee em = new Employee(10,"Sam Vei","CASA");
+		newListEmployee.add(em);
+		try{
+			connection = (Connection) DriverManager.getConnection(localhost, user, password);		
+			String query = "SELECT * FROM payroll_db.employee";
+			Statement st = (Statement) connection.createStatement();
+			ResultSet rs = st.executeQuery(query); 
+			while (rs.next())
+		      {
+		        int id = rs.getInt("employee_id");
+		        String firstName = rs.getString("first_name");
+		        String lastName = rs.getString("last_name");
+		        String payment_type = rs.getString("payment_type");
+		        String address = rs.getString("address");
+		        Employee employee = new Employee(id,firstName+" "+lastName,address);
+		        newListEmployee.add(employee);
+		      }
+			return newListEmployee;
+		}catch(Exception e)
+		{
+			System.err.println(e);
+		}
 		return null;
 	}
 }

@@ -7,6 +7,7 @@ import java.util.HashMap;
 import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.boundaries.RepositoryDatabase;
+import payrollcasestudy.boundaries.mysqlConnection;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.PayCheck;
 import payrollcasestudy.entities.views.EmployeePresenter;
@@ -27,7 +28,7 @@ public class Routes {
 		 addEmployeeSalaried.execute();
 		 addEmployeeHourly.execute();
 		 addEmployeeCommissioned.execute();*/
-		Repository repository = new RepositoryDatabase();
+		Repository repository = new mysqlConnection();
 		HashMap<String,Object> view = new HashMap<String, Object>();
 		get("/", (request, response) -> {
 		      return new ModelAndView(view, "templates/mainPage.vtl");
