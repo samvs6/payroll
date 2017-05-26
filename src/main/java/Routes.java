@@ -4,9 +4,12 @@ import static spark.Spark.post;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.google.gson.Gson;
+
 import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.boundaries.RepositoryDatabase;
+import payrollcasestudy.boundaries.WebService;
 import payrollcasestudy.boundaries.mysqlConnection;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.PayCheck;
@@ -95,5 +98,12 @@ public class Routes {
 			view.put("total", total);
             return new ModelAndView(view, "templates/Pay/payEmployee.vtl");
         }, new VelocityTemplateEngine());
+		
+		get("/api/v1/allEmployees", (req, res) -> EmployeePresenter.getAllEmployees(), WebService.json());
+		get("/api/v1/allEmployees/:id", (request, response) -> {
+			Employee employee;
+			employee = EmployeePresenter.getEmployee(Integer.parseInt(request.params(":id")));
+			return WebService.toJson(employee);
+		});
 	}
 }

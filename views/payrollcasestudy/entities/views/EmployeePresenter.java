@@ -44,5 +44,14 @@ public class EmployeePresenter {
 		return "Error al agregar empleado";
 		 
 	}
+	
+	public static Employee getEmployee(int employeeId) {
+		return repository.getEmployee(employeeId);
+	}
+	
+	public static List<Employee> getAllEmployees() {
+		return repository.getAllEmployees();
+	
+	}
 
 }
