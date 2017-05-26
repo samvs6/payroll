@@ -9,9 +9,13 @@ import com.mysql.jdbc.Connection;
 import com.mysql.jdbc.Statement;
 
 import payrollcasestudy.entities.Employee;
+import payrollcasestudy.entities.paymentclassifications.CommissionedPaymentClassification;
 import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassification;
+import payrollcasestudy.entities.paymentclassifications.PaymentClassification;
+import payrollcasestudy.entities.paymentclassifications.SalariedClassification;
 import payrollcasestudy.transactions.Transaction;
 import payrollcasestudy.transactions.add.AddHourlyEmployeeTransaction;
+import payrollcasestudy.transactions.add.AddSalariedEmployeeTransaction;
 
 public class mysqlConnection implements Repository{
 	
@@ -45,7 +49,27 @@ public static mysqlConnection relationalDatabase = new mysqlConnection();
 		        int id = rs.getInt("employee_id");
 		        String fullname = rs.getString("fullname");
 		        String address = rs.getString("address");
-		        employee = new Employee(id,fullname,address);				
+		        int salary = rs.getInt("salary");
+		        int comission = rs.getInt("comission");
+		        String payment_type = rs.getString("payment_type");
+		        employee = new Employee(id,fullname,address);	
+		        System.out.println(payment_type + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1");
+		        if(new String(payment_type).equals("Salariado"))
+		        {
+		        	PaymentClassification salariedClassification = new SalariedClassification(salary);
+		        	employee.setPaymentClassification(salariedClassification);
+		        }
+		        if(new String(payment_type).equals("Por hora"))
+		        {
+		        	PaymentClassification hourlyClassification = new HourlyPaymentClassification(salary);
+		        	employee.setPaymentClassification(hourlyClassification);
+		        }
+		        if(new String(payment_type).equals("Con comision"))
+		        {
+		        	PaymentClassification commissionedClassification = new CommissionedPaymentClassification(salary,comission);
+		        	employee.setPaymentClassification(commissionedClassification);
+		        }
+		       			
 		      }
 			return employee;
 		}catch(Exception e)
@@ -123,14 +147,7 @@ public static mysqlConnection relationalDatabase = new mysqlConnection();
 		        int salary = rs.getInt("salary");
 		        int comission = rs.getInt("comission");
 		        Employee employee = null;
-		       // if(payment_type == "Salariado"){
-		       // 	Transaction Addemployee = new AddHourlyEmployeeTransaction(id, fullname, address,salary);
-		        	//Addemployee.execute(relationalDatabase);
-		       // 	employee = relationalDatabase.getEmployee(id);
-		      //  }else{
-		        
-		        	employee = new Employee(id,fullname,address);
-		      //  }
+		        employee = getEmployee(id);		        
 				newListEmployee.add(employee);
 		      }
 			return newListEmployee;
