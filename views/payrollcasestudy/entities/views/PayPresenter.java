@@ -39,7 +39,7 @@ public class PayPresenter {
 		
 	}
 	
-	public static PayCheck getPayCheckFromPayDayTransaction(String employeeId)
+	public static PayCheck getPayCheck(String employeeId)
 	{
 		return paydayTransaction.getPaycheck(Integer.parseInt(employeeId));
 	}

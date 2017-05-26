@@ -25,12 +25,7 @@ import spark.template.velocity.VelocityTemplateEngine;
 public class Routes {
 
 	public static void main(String[] args) {
-		 /*Transaction addEmployeeSalaried = new AddSalariedEmployeeTransaction(1,"Bob", "Home", 1000.0);	
-		 Transaction addEmployeeHourly = new AddHourlyEmployeeTransaction(2, "Bill", "Home", 15.25);
-		 Transaction addEmployeeCommissioned = new AddCommissionedEmployeeTransaction(3, "Carol", "Granja", 700.0, 9.25);
-		 addEmployeeSalaried.execute();
-		 addEmployeeHourly.execute();
-		 addEmployeeCommissioned.execute();*/
+
 		Repository repository = new mysqlConnection();
 		HashMap<String,Object> view = new HashMap<String, Object>();
 		get("/", (request, response) -> {
@@ -55,7 +50,7 @@ public class Routes {
 			return new ModelAndView(view, "templates/Employee/showEmployee.vtl");
 		    }, new VelocityTemplateEngine());
 		
-		post("/showAllEmployees", (request, response) -> {
+		post("/showAllEmployees", (request, response) -> { // cambiar ruta
 			String respuesta = EmployeePresenter.createNewEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"), request.queryParams("employeeType"),request.queryParams("salary"),request.queryParams("comision"));
 			ArrayList<Employee> employees=new ArrayList<>();
 			employees =repository.getAllEmployees();
@@ -89,7 +84,7 @@ public class Routes {
 			int employeeId_int =  Integer.parseInt( employeeId);
 			Employee employee = repository.getEmployee(employeeId_int);
 			PayCheck payCheck;
-			payCheck = PayPresenter.getPayCheckFromPayDayTransaction(employeeId);
+			payCheck = PayPresenter.getPayCheck(employeeId);
 			double total =0;
 			if(payCheck!=null){
 				total = payCheck.getNetPay();
