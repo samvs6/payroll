@@ -10,6 +10,8 @@ import com.mysql.jdbc.Statement;
 
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.paymentclassifications.HourlyPaymentClassification;
+import payrollcasestudy.transactions.Transaction;
+import payrollcasestudy.transactions.add.AddHourlyEmployeeTransaction;
 
 public class mysqlConnection implements Repository{
 	
@@ -32,7 +34,24 @@ public static mysqlConnection relationalDatabase = new mysqlConnection();
 
 	@Override
 	public Employee getEmployee(int employeeId) {
-		// TODO Auto-generated method stub
+		Employee employee = null;
+		try{
+			connection = (Connection) DriverManager.getConnection(localhost, user, password);		
+			String query = "SELECT * FROM payroll_db.employee WHERE employee_id ="+ employeeId;
+			Statement st = (Statement) connection.createStatement();
+			ResultSet rs = st.executeQuery(query); 
+			while (rs.next())
+		      {
+		        int id = rs.getInt("employee_id");
+		        String fullname = rs.getString("fullname");
+		        String address = rs.getString("address");
+		        employee = new Employee(id,fullname,address);				
+		      }
+			return employee;
+		}catch(Exception e)
+		{
+			System.err.println(e);
+		}
 		return null;
 	}
 
@@ -41,8 +60,8 @@ public static mysqlConnection relationalDatabase = new mysqlConnection();
 		int queryResult=0;
 		try{
 			connection = (Connection) DriverManager.getConnection(localhost, user, password);
-			String insertEmployee_query = "INSERT INTO payroll_db.employee (employee_id, first_name, last_name, address, payment_type) "
-					+ "VALUES ('"+employee.getEmployeeId()+"', '"+employee.getName()+"', 'Undefined', '"+employee.getAddress()+"', 'hourly')";
+			String insertEmployee_query = "INSERT INTO payroll_db.employee (employee_id, fullname, address, payment_type, salary, comission) "
+					+ "VALUES ('"+employee.getEmployeeId()+"', '"+employee.getName()+"', '"+employee.getAddress()+"', '"+employee.getTypeEmployee()+"', '10', '0')";
 			Statement statement = (Statement) connection.createStatement();
 			queryResult = ((java.sql.Statement) statement).executeUpdate(insertEmployee_query);
 			System.out.println("Empleado creado satisfactoriamente.");
@@ -90,8 +109,6 @@ public static mysqlConnection relationalDatabase = new mysqlConnection();
 	@Override
 	public ArrayList<Employee> getAllEmployees() {
 		ArrayList<Employee> newListEmployee = new ArrayList<>();
-		Employee em = new Employee(10,"Sam Vei","CASA");
-		newListEmployee.add(em);
 		try{
 			connection = (Connection) DriverManager.getConnection(localhost, user, password);		
 			String query = "SELECT * FROM payroll_db.employee";
@@ -100,12 +117,21 @@ public static mysqlConnection relationalDatabase = new mysqlConnection();
 			while (rs.next())
 		      {
 		        int id = rs.getInt("employee_id");
-		        String firstName = rs.getString("first_name");
-		        String lastName = rs.getString("last_name");
+		        String fullname = rs.getString("fullname");
 		        String payment_type = rs.getString("payment_type");
 		        String address = rs.getString("address");
-		        Employee employee = new Employee(id,firstName+" "+lastName,address);
-		        newListEmployee.add(employee);
+		        int salary = rs.getInt("salary");
+		        int comission = rs.getInt("comission");
+		        Employee employee = null;
+		       // if(payment_type == "Salariado"){
+		       // 	Transaction Addemployee = new AddHourlyEmployeeTransaction(id, fullname, address,salary);
+		        	//Addemployee.execute(relationalDatabase);
+		       // 	employee = relationalDatabase.getEmployee(id);
+		      //  }else{
+		        
+		        	employee = new Employee(id,fullname,address);
+		      //  }
+				newListEmployee.add(employee);
 		      }
 			return newListEmployee;
 		}catch(Exception e)
@@ -114,5 +140,7 @@ public static mysqlConnection relationalDatabase = new mysqlConnection();
 		}
 		return null;
 	}
+	
+	
 }
 
