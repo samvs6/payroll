@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import payrollcasestudy.boundaries.PayrollDatabase;
 import payrollcasestudy.boundaries.Repository;
-import payrollcasestudy.boundaries.mysqlConnection;
 import payrollcasestudy.entities.Employee;
 import payrollcasestudy.transactions.Transaction;
 import payrollcasestudy.transactions.add.AddCommissionedEmployeeTransaction;
@@ -14,9 +12,13 @@ import payrollcasestudy.transactions.add.AddHourlyEmployeeTransaction;
 import payrollcasestudy.transactions.add.AddSalariedEmployeeTransaction;
 
 public class EmployeePresenter {
-	private static Repository repository = new mysqlConnection();
-
-	public static String createNewEmployee(String employeeId, String name, String address,String employeeType , String salary, String comision){
+	
+	private Repository repository;
+	
+	public EmployeePresenter(Repository repository){
+		this.repository = repository;
+	}
+	public String createNewEmployee(String employeeId, String name, String address,String employeeType , String salary, String comision){
 		int employeeId_int = Integer.parseInt(employeeId);
 		int employeeType_int = Integer.parseInt(employeeType);
 		double salary_doule = Double.parseDouble(salary);
@@ -45,11 +47,11 @@ public class EmployeePresenter {
 		 
 	}
 	
-	public static Employee getEmployee(int employeeId) {
+	public Employee getEmployee(int employeeId) {
 		return repository.getEmployee(employeeId);
 	}
 	
-	public static List<Employee> getAllEmployees() {
+	public List<Employee> getAllEmployees() {
 		return repository.getAllEmployees();
 	
 	}

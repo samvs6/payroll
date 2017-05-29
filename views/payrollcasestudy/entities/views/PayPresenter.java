@@ -11,11 +11,15 @@ import payrollcasestudy.transactions.add.AddSalesReceiptTransaction;
 import payrollcasestudy.transactions.add.AddTimeCardTransaction;
 
 public class PayPresenter {
-	private static Repository repository = new mysqlConnection();
-
+	
 	private static Transaction paymentTransaction;
 	private static PaydayTransaction paydayTransaction;
-
+	private static Repository repository;
+	
+	public PayPresenter(Repository respository){
+		this.repository = repository;
+	}
+	
 	public static void createPaymentForHourly(String year, String month, String day, String hours, String employeeId)
 	{
 		Calendar date = new GregorianCalendar(Integer.parseInt(year),Integer.parseInt(month),Integer.parseInt(day));
