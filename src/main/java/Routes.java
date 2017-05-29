@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-
+import payrollcasestudy.boundaries.EmployeeGson;
 import payrollcasestudy.boundaries.Repository;
 import payrollcasestudy.boundaries.WebService;
 import payrollcasestudy.entities.Employee;
@@ -95,7 +95,8 @@ public class Routes {
 		get("/api/v1/allEmployees/:id", (request, response) -> {
 			Employee employee;
 			employee = employeePresenter.getEmployee(Integer.parseInt(request.params(":id")));
-			return WebService.toJson(employee);
+			EmployeeGson employeegson = new EmployeeGson(employee);
+			return WebService.toJson(employeegson);
 		});
 	}
 }
