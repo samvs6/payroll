@@ -50,13 +50,10 @@ public class Routes {
 			return new ModelAndView(view, "templates/Employee/showEmployee.vtl");
 		    }, new VelocityTemplateEngine());
 		
-		post("/showAllEmployees", (request, response) -> { // cambiar ruta
+		post("/createEmployee", (request, response) -> { // cambiar ruta
 			String respuesta = EmployeePresenter.createNewEmployee(request.queryParams("id"), request.queryParams("name"), request.queryParams("address"), request.queryParams("employeeType"),request.queryParams("salary"),request.queryParams("comision"));
-			ArrayList<Employee> employees=new ArrayList<>();
-			employees =repository.getAllEmployees();
-			view.put("employees", employees);
 			view.put("respuesta", respuesta);
-		      return new ModelAndView(view, "templates/Employee/listingEmployee.vtl");
+		      return new ModelAndView(view, "templates/result.vtl");
 		    }, new VelocityTemplateEngine());
 		
 		post("/payHourly", (request, response) -> {		
