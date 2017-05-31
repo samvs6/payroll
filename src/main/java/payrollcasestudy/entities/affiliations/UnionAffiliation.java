@@ -1,17 +1,24 @@
 package payrollcasestudy.entities.affiliations;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.hamcrest.Matcher;
 
+import payrollcasestudy.boundaries.PayrollDatabase;
+import payrollcasestudy.entities.Employee;
 import payrollcasestudy.entities.PayCheck;
 import payrollcasestudy.entities.ServiceCharge;
 import static payrollcasestudy.entities.paymentclassifications.PaymentClassification.isInPayPeriod;
 
 public class UnionAffiliation {
 	public  final static  UnionAffiliation NO_AFFILIATION = new UnionAffiliation(0, 0);
+	private Map<Integer, Affiliation> affiliations = new HashMap<Integer, Affiliation>();
+	private int cantAffiliations = 0;
 	Map<Calendar, ServiceCharge> serviceCharges = new HashMap<Calendar, ServiceCharge>();
 	private int memberId;
 	private double dues;
@@ -43,7 +50,11 @@ public class UnionAffiliation {
 	}
 	private double calculateUnionAmount(PayCheck payCheck) {
 		int fridays = numberOfFridays(payCheck.getPayPeriodStart(), payCheck.getPayPeriodEnd());
-		return dues * fridays;
+		double porcent = 0;
+		for(int i = 0; i < cantAffiliations;i++ ){
+			porcent = porcent * getAffiliation(i).getDues();
+		}
+		return porcent * fridays;
 	}
 
 	private double calculateServiceCharges(PayCheck payCheck) {
@@ -64,5 +75,52 @@ public class UnionAffiliation {
 		}
 		return fridays;
 	}
+	
+	private void addAffiliation(Affiliation affiliation){
+		affiliations.put(cantAffiliations, affiliation);
+		cantAffiliations = cantAffiliations +1;
+	}
+	
+	private Affiliation getAffiliation(int count){
+		return affiliations.get(count);
+	}
+	
+	private Affiliation getAffiliationByname(String name){
+		Affiliation affiliation = null;
+		for(int i = 0; i < cantAffiliations;i++ ){
+			if(getAffiliation(i).getName()==name){
+				affiliation = getAffiliation(i); 
+				return affiliation;
+			}
+		}
+		return affiliation;
+	}
+	
+	public ArrayList<Affiliation> getAllAffiliations(){
+		ArrayList<Affiliation> allAffiliations = new ArrayList<>();
+		Affiliation affiliation;
+		for(int i = 0; i < cantAffiliations;i++ ){
+			affiliation = getAffiliation(i);
+			allAffiliations.add(affiliation);
+		}
+		return allAffiliations;
+	}
+	
+	public Set<Double> getAllAffiliationsPorcent(){
+		Set<Double> allAffiliationsPorcen = null;
+		Affiliation affiliation;
+		for(int i = 0; i < cantAffiliations;i++ ){
+			affiliation = getAffiliation(i);
+			allAffiliationsPorcen.add(affiliation.getDues());
+		}
+		return allAffiliationsPorcen;
+	}
+
+	
+	
+	
+
+	
+	
 	
 }
